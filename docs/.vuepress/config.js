@@ -1,10 +1,12 @@
 // .vuepress/config.js
 module.exports = {
+    base: "/blog/",
     title: 'Hello VuePress',
     description: 'Just playing around',
     themeConfig: {
         logo: '/assets/img/logo.png',
         ///////////////////////////////////////////
+        //导航栏
         nav: [
             { text: '根', link: '/' },
             { text: '序言', link: '/Preface/' },
@@ -26,6 +28,7 @@ module.exports = {
             { text: 'External', link: 'https://google.com' },
         ],
         ///////////////////////////////////////////
+        //侧边栏
         sidebar: [
             '/',
             '/page-a',
