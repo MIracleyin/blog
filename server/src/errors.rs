@@ -28,13 +28,24 @@ impl WebResponseError for CustomError {
             .into(),
         )
     }
-}
+} 
 
 impl fmt::Display for CustomError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             CustomError::NotFound(e) => write!(f, "{e}"),
             CustomError::InternalServerError(e) => write!(f, "{e}"),
+        }
+    }
+}
+
+impl From<sqlx::Error> for CustomError {
+    fn from(e: sqlx::Error) -> Self {
+        match e {
+            sqlx::Error::RowNotFound => Self::NotFound("Can't find data".into()),
+            _ => {
+                Self::InternalServerError("Internal Server Error, please context miracleyin".into())
+            }
         }
     }
 }

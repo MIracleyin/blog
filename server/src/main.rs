@@ -6,7 +6,7 @@ use article::view;
 
 use errors::CustomError;
 use ntex::web::{self, middleware, App, HttpServer};
-use sqlx::{Postgres, Pool};
+use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
 use std::{
     env,
     sync::{Arc, Mutex},
@@ -25,13 +25,22 @@ async fn main() {
     env_logger::init();
 
     let db_url = env::var("DATABASE_URL").expect("Please set `DATABASE_URL`");
-    println!("{:#?}", db_url);
+    // println!("{:#?}", db_url);
 
     // State
+    let app_state = Arc::new(Mutex::new(AppState {
+        db_pool: PgPoolOptions::new()
+            .max_connections(10)
+            .connect(&db_url)
+            .await
+            .unwrap(),
+    }));
 
-    HttpServer::new(|| {
+    HttpServer::new(move || {
         App::new()
+            .state(Arc::clone(&app_state))
             .wrap(middleware::Logger::default())
+            .service(view::get_articles)
             .service(index)
             .service(error)
     })
