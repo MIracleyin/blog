@@ -16,8 +16,10 @@ fn app() -> Html {
                     <a href="#" class="button icon-puzzle">{ "About" }</a>
                 </div>
             </nav>
-
-        <h1>{ "Hello, world!" }</h1>
+            <p>{""}</p>
+            <p>{""}</p>
+            <p>{""}</p>
+            <h1>{ "Hello, world!" }</h1>
         </>
     }
 }
