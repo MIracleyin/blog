@@ -1,6 +1,7 @@
 mod article;
 mod errors;
 mod models;
+mod user;
 
 use article::{delete, edit, new, search, view};
 
