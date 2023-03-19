@@ -1,7 +1,5 @@
-use cookie::{time::Duration, Cookie};
 use std::sync::Arc;
-
-
+use cookie::{Cookie, time::Duration};
 use ntex::{
     http::Response,
     web::{
@@ -93,7 +91,7 @@ pub async fn github_login(
     let mut response = Response::Ok().body(format!("Hi, {}!", user_info.login));
 
     // 忽略错误
-    let _ = response.add_cookie(&cookie);
+    let _ = response.add_cookie(&cookie); // 需要 cookie 版本和 ntex 依赖的 cookie 版本保持一致
 
     Ok(response)
 }

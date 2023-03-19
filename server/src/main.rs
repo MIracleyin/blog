@@ -4,6 +4,7 @@ mod models;
 mod user;
 
 use article::{delete, edit, new, search, view};
+use user::login;
 
 use errors::CustomError;
 use ntex::web::{self, middleware, App, HttpServer};
@@ -56,7 +57,8 @@ fn route(cfg: &mut web::ServiceConfig) {
             .route("/{id}", web::delete().to(delete::delete_article))
             .route("/search/{keyword}", web::get().to(search::search_article)),
     )
-    .service(web::scope("/articles").route("", web::get().to(view::get_articles_preview)));
+    .service(web::scope("/articles").route("", web::get().to(view::get_articles_preview)))
+    .service(web::scope("/user").route("/login", web::post().to(login::github_login)));
 }
 
 #[web::get("/")]
