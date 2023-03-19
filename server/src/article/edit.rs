@@ -1,13 +1,12 @@
 use std::sync::Arc;
 
 use ntex::web::{
-    self,
     types::{Json, State},
 };
 
 use crate::{errors::CustomError, models::article::Article, AppState};
 
-#[web::put("/article")]
+// #[web::put("/article")]
 pub async fn edit_article(
     article: Json<Article>,
     state: State<Arc<AppState>>,
@@ -28,5 +27,5 @@ pub async fn edit_article(
     .execute(db_pool)
     .await?;
 
-    Ok("修改文章成果！".into())
+    Ok("修改文章成功！".into())
 }

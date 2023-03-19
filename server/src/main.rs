@@ -2,7 +2,7 @@ mod article;
 mod errors;
 mod models;
 
-// use article::{view, edit, new};
+use article::{delete, edit, new, search, view};
 
 use errors::CustomError;
 use ntex::web::{self, middleware, App, HttpServer};
@@ -37,17 +37,25 @@ async fn main() {
         App::new()
             .state(Arc::clone(&app_state))
             .wrap(middleware::Logger::default())
-            // .service(view::get_all_articles)
-            // .service(new::new_article)
-            // .service(edit::edit_article)
-            .service(index)
-            .service(error)
+            .configure(route)
     })
     .bind("0.0.0.0:12345")
     .unwrap()
     .run()
     .await
     .unwrap();
+}
+
+fn route(cfg: &mut web::ServiceConfig) {
+    cfg.service(
+        web::scope("/article")
+            .route("/{id}", web::get().to(view::get_article))
+            .route("", web::post().to(new::new_article))
+            .route("", web::put().to(edit::edit_article))
+            .route("/{id}", web::delete().to(delete::delete_article))
+            .route("/search/{keyword}", web::get().to(search::search_article)),
+    )
+    .service(web::scope("/articles").route("", web::get().to(view::get_articles_preview)));
 }
 
 #[web::get("/")]

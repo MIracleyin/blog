@@ -1,27 +1,50 @@
-use ntex::web::{
-    self,
-    types::{Json, State},
-};
+use ntex::web::types::{Json, State, Path};
 use std::sync::Arc;
 
-use crate::{errors::CustomError, models::article::Article, AppState};
+use crate::{
+    errors::CustomError,
+    models::article::{Article, ArticlePreview},
+    AppState,
+};
 
-#[web::get("/articles")]
-pub async fn get_all_articles(
+/// 获取文章预览
+pub async fn get_articles_preview(
     state: State<Arc<AppState>>,
-) -> Result<Json<Vec<Article>>, CustomError> {
+) -> Result<Json<Vec<ArticlePreview>>, CustomError> {
     let db_pool = &state.db_pool;
-    let articles = sqlx::query!("SELECT * FROM articles")
+    let articles = sqlx::query!("SELECT id, title, date FROM articles")
         .fetch_all(db_pool)
         .await?
         .iter()
-        .map(|i| Article {
-            id: Some(i.id as u32),
+        .map(|i| ArticlePreview {
+            id: i.id as u32,
             title: i.title.clone(),
-            content: i.content.clone(),
-            date: Some(i.date), // 为什么修改数据库后，这里的代码就不报错了呢？
+            date: i.date,
         })
-        .collect::<Vec<Article>>();
+        .collect();
 
     Ok(Json(articles))
 }
+
+pub async fn get_article(
+    id: Path<(u32,)>,
+    state: State<Arc<AppState>>,
+) -> Result<Json<Article>, CustomError> {
+    let db_pool = &state.db_pool;
+    let article = sqlx::query!(
+        "SELECT title, content, date FROM articles WHERE id = $1",
+        id.0 as i32
+    )
+    .fetch_one(db_pool)
+    .await?;
+
+    let article = Article {
+        id: None,
+        title: article.title.clone(),
+        content: article.content.clone(),
+        date: Some(article.date),
+    };
+
+    Ok(Json(article))
+}
+
