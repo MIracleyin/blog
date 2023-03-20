@@ -2,10 +2,11 @@ use std::sync::Arc;
 
 use ntex::web::types::{State, Path};
 
-use crate::{AppState, errors::CustomError};
+use crate::{AppState, errors::CustomError, models::user::Admin};
 
 /// 删除文章
 pub async fn delete_article(
+    _: Admin,
     id: Path<(u32,)>,
     state: State<Arc<AppState>>,
 ) -> Result<String, CustomError> {

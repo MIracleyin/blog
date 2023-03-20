@@ -2,6 +2,7 @@ mod article;
 mod errors;
 mod models;
 mod user;
+// mod middlewares;
 
 use article::{delete, edit, new, search, view};
 use user::login;

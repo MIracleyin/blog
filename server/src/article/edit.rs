@@ -4,10 +4,11 @@ use ntex::web::{
     types::{Json, State},
 };
 
-use crate::{errors::CustomError, models::article::Article, AppState};
+use crate::{errors::CustomError, models::{article::Article, user::Admin}, AppState};
 
 // #[web::put("/article")]
 pub async fn edit_article(
+    _: Admin,
     article: Json<Article>,
     state: State<Arc<AppState>>,
 ) -> Result<String, CustomError> {

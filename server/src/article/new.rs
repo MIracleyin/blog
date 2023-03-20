@@ -5,10 +5,11 @@ use ntex::web::{
     HttpResponse, Responder,
 };
 
-use crate::{errors::CustomError, models::article::Article, AppState};
+use crate::{errors::CustomError, models::{article::Article, user::Admin}, AppState};
 
 // #[web::post("/article")]
 pub async fn new_article(
+    _: Admin,
     article: Json<Article>,
     state: State<Arc<AppState>>,
 ) -> Result<impl Responder, CustomError> {
