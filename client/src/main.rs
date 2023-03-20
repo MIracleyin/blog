@@ -1,9 +1,9 @@
 mod app;
 mod components;
 
-use app::App;
 use yew::prelude::*;
 
 fn main() {
-    yew::Renderer::<App>::new().render();
+    yew::Renderer::<app::App>::new().render();
 }
+
