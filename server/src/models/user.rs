@@ -6,7 +6,7 @@ use ntex::{
     web::{ErrorRenderer, FromRequest},
 };
 use reqwest::Client;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 use crate::{errors::CustomError, AppState};
 
@@ -21,7 +21,7 @@ pub struct AccessToken {
     pub access_token: String,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct GithubUserInfo {
     /// Github 用户 ID
     pub id: i32,
@@ -34,13 +34,15 @@ pub struct GithubUserInfo {
 /// 网站中的所有用户
 #[derive(Debug, Clone)]
 pub struct User {
-    pub access_token: String,
+    pub id: i32,
+    // pub access_token: String,
 }
 
 /// 网站中的管理员
 #[derive(Debug, Clone)]
 pub struct Admin {
-    pub access_token: String,
+    pub id: i32,
+    // pub access_token: String,
 }
 
 impl<E: ErrorRenderer> FromRequest<E> for User {
@@ -79,9 +81,7 @@ impl<E: ErrorRenderer> FromRequest<E> for User {
                 ));
             }
 
-            Ok(Self {
-                access_token: access_token.value().to_string(),
-            })
+            Ok(Self { id: user_id })
         };
 
         Box::pin(fut)
@@ -126,15 +126,14 @@ impl<E: ErrorRenderer> FromRequest<E> for Admin {
                         "你不是管理员，无权执行该操作".into(),
                     ));
                 }
-            } else { // 未查到
+            } else {
+                // 未查到
                 return Err(CustomError::AuthFailed(
                     "还未在本站使用 Github 登录过，请登录".into(),
                 ));
             }
 
-            Ok(Self {
-                access_token: access_token.value().to_string(),
-            })
+            Ok(Self { id: user_id })
         };
 
         Box::pin(fut)
