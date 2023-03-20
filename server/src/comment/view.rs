@@ -21,7 +21,7 @@ pub async fn get_comments_for_article(
     let comments = sqlx::query!(
         "SELECT comments.id, comments.user_id, comments.content, comments.date, users.name, users.avatar_url FROM comments JOIN users ON comments.user_id = users.id WHERE comments.article = $1", article_id as i32
     ).fetch_all(db_pool).await?.iter().map(|i| Comment {
-        id: i.id,
+        id: Some(i.id),
         user: Some(GithubUserInfo {
             id: i.user_id,
             login: i.name.clone(),
