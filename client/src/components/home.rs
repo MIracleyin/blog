@@ -1,6 +1,6 @@
 use yew::prelude::*;
 
-use crate::components::card::Card;
+use crate::components::{card::Card, article::articles::ArticlePreview};
 
 #[function_component(Home)]
 pub fn home() -> Html {
@@ -10,8 +10,9 @@ pub fn home() -> Html {
         .emit("Home".into());
 
     html! {
-        <Card title={"Welcome!"}>
+        <Card title={"Article"}>
             <p>{ "Just a blog..." }</p>
+            <ArticlePreview/>
         </Card>
     }
 }

@@ -1,5 +1,7 @@
 mod app;
 mod components;
+mod fetch;
+mod models;
 
 use yew::prelude::*;
 

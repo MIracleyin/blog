@@ -164,6 +164,10 @@ dependencies = [
 name = "client"
 version = "0.1.0"
 dependencies = [
+ "gloo",
+ "serde",
+ "serde_json",
+ "wasm-bindgen-futures",
  "web-sys",
  "yew",
  "yew-router",
