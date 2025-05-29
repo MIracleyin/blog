@@ -21,8 +21,8 @@ const posts = defineCollection({
     toc: z.boolean().optional().default(themeConfig.global.toc),
     lang: z.enum(['', ...allLocales]).optional().default(''),
     abbrlink: z.string().optional().default('').refine(
-      abbrlink => !abbrlink || /^[a-z0-9\-]*$/.test(abbrlink),
-      { message: 'Abbrlink can only contain lowercase letters, numbers and hyphens' },
+      abbrlink => !abbrlink || /^[a-z0-9\-\u4e00-\u9fff]*$/.test(abbrlink),
+      { message: 'Abbrlink can only contain lowercase letters, numbers, hyphens and Chinese characters' },
     ),
   }),
 })
