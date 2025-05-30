@@ -14,7 +14,7 @@ export const themeConfig: ThemeConfig = {
     // author name
     author: 'miracleyin',
     // site url
-    url: 'https://retypeset.radishzz.cc',
+    url: 'https://blog.yinzhang.win',
     // favicon url
     // recommended formats: svg, png or ico
     favicon: '/icons/favicon.svg', // or https://example.com/favicon.svg
@@ -75,7 +75,7 @@ export const themeConfig: ThemeConfig = {
     // https://waline.js.org/en/
     waline: {
       // server url
-      serverURL: 'https://retypeset-comment.radishzz.cc',
+      serverURL: 'https://blog.yinzhang.win',
       // emoji url
       emoji: [
         'https://unpkg.com/@waline/emojis@1.2.0/tw-emoji',
@@ -93,36 +93,36 @@ export const themeConfig: ThemeConfig = {
   // SEO SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   seo: {
     // @twitter ID
-    twitterID: '@radishzz_',
+    twitterID: '@Tigerbohu',
     // site verification
     verification: {
       // google search console
       // https://search.google.com/search-console
-      google: 'AUCrz5F1e5qbnmKKDXl2Sf8u6y0kOpEO1wLs6HMMmlM',
+      // google: 'AUCrz5F1e5qbnmKKDXl2Sf8u6y0kOpEO1wLs6HMMmlM',
       // bing webmaster tools
       // https://www.bing.com/webmasters
-      bing: '64708CD514011A7965C84DDE1D169F87',
+      // bing: '64708CD514011A7965C84DDE1D169F87',
       // yandex webmaster
       // https://webmaster.yandex.com
-      yandex: '',
+      // yandex: '',
       // baidu search
       // https://ziyuan.baidu.com
       baidu: '',
     },
     // google analytics
     // https://analytics.google.com
-    googleAnalyticsID: '',
+    googleAnalyticsID: 'irhCHM5RRqqVY7uQpJ0iEQ',
     // umami analytics
     // https://cloud.umami.is
-    umamiAnalyticsID: '520af332-bfb7-4e7c-9386-5f273ee3d697',
+    // umamiAnalyticsID: '520af332-bfb7-4e7c-9386-5f273ee3d697',
     // follow verification
     // https://follow.is/
-    follow: {
-      // feed ID
-      feedID: '',
-      // user ID
-      userID: '',
-    },
+    // follow: {
+    //   // feed ID
+    //   feedID: '',
+    //   // user ID
+    //   userID: '',
+    // },
     // apiflash access key
     // automatically generate website screenshots for open graph images
     // get your access key at: https://apiflash.com/
@@ -140,11 +140,11 @@ export const themeConfig: ThemeConfig = {
       },
       {
         name: 'GitHub',
-        url: 'https://github.com/radishzzz/astro-theme-retypeset',
+        url: 'https://github.com/MIracleyin',
       },
       {
         name: 'Email',
-        url: 'email@radishzz.cc',
+        url: 'miracleyin@live.com',
       },
       // {
       //   name: 'X',
